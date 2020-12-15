@@ -2,20 +2,34 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type GroupChat {
+  model: String!
+  id: Float!
+}
+
 type User {
   name: String!
   email: String!
+  groupChat: GroupChat
 }
 
 type Query {
   users: [User!]!
+  groupChats: [GroupChat!]!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
+  createGroupChat(createGroupChatInput: CreateGroupChatInput!): GroupChat!
 }
 
 input CreateUserInput {
   name: String!
   email: String!
+  createGroupChatInput: CreateGroupChatInput!
+}
+
+input CreateGroupChatInput {
+  model: String!
+  id: Float!
 }

@@ -17,4 +17,4 @@ import { join } from 'path';
     UserModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
