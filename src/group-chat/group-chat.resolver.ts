@@ -9,7 +9,7 @@ export class GroupChatResolver {
   constructor(
     @Inject('GroupChatService')
     private readonly service: GroupChatService,
-  ) { }
+  ) {}
 
   @Query((returns) => [GroupChat])
   async groupChats(): Promise<GroupChat[]> {

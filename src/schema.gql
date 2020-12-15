@@ -3,11 +3,13 @@
 # ------------------------------------------------------
 
 type GroupChat {
+  _id: String
   model: String!
-  id: Float!
+  modelId: Float!
 }
 
 type User {
+  _id: String
   name: String!
   email: String!
   groupChat: GroupChat
@@ -24,12 +26,14 @@ type Mutation {
 }
 
 input CreateUserInput {
+  _id: String
   name: String!
   email: String!
   createGroupChatInput: CreateGroupChatInput!
 }
 
 input CreateGroupChatInput {
+  _id: String
   model: String!
-  id: Float!
+  modelId: Float!
 }

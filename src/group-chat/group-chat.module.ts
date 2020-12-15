@@ -6,9 +6,11 @@ import { GroupChatResolver } from './group-chat.resolver';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: GroupChat.name, schema: GroupChatSchema }]),
+    MongooseModule.forFeature([
+      { name: GroupChat.name, schema: GroupChatSchema },
+    ]),
   ],
   providers: [GroupChatService, GroupChatResolver],
-  exports: [GroupChatService]
+  exports: [GroupChatService],
 })
-export class GroupChatModule { }
+export class GroupChatModule {}

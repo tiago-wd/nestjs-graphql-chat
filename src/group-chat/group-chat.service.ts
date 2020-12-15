@@ -6,12 +6,14 @@ import { CreateGroupChatInput } from './dto/group-chat.input';
 
 @Injectable()
 export class GroupChatService {
-  constructor(@InjectModel(GroupChat.name) private groupChatModel: Model<GroupChatDocument>) { }
+  constructor(
+    @InjectModel(GroupChat.name)
+    private groupChatModel: Model<GroupChatDocument>,
+  ) {}
 
   async create(createGroupChatInput: CreateGroupChatInput): Promise<GroupChat> {
-    console.log(createGroupChatInput);
     const createdGroupChat = new this.groupChatModel(createGroupChatInput);
-    return (await createdGroupChat.save()).populate("groupChat");
+    return await createdGroupChat.save();
   }
 
   async findAll(): Promise<GroupChat[]> {
