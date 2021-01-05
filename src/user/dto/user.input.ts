@@ -1,6 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { MaxLength } from 'class-validator';
-import { CreateGroupChatInput } from '../../group-chat/dto/group-chat.input';
+import { CreateGroupInput } from '../../group/dto/group.input';
 
 @InputType()
 export class CreateUserInput {
@@ -15,6 +15,6 @@ export class CreateUserInput {
   @MaxLength(30)
   email: string;
 
-  @Field((type) => CreateGroupChatInput)
-  createGroupChatInput: CreateGroupChatInput;
+  @Field((type) => CreateGroupInput, { nullable: true })
+  createGroupInput: CreateGroupInput;
 }

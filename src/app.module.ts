@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UserModule } from './user/user.module';
+import { GroupModule } from './group/group.module';
+import { MessageModule } from './message/message.module';
 import { join } from 'path';
 
 @Module({
@@ -15,6 +17,8 @@ import { join } from 'path';
       playground: true,
     }),
     UserModule,
+    GroupModule,
+    MessageModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

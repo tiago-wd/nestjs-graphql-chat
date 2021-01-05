@@ -2,38 +2,58 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type GroupChat {
+type Message {
+  _id: String
+  text: String!
+  user: User!
+  group: Group
+}
+
+type Group {
   _id: String
   model: String!
-  modelId: Float!
+  modelId: String!
+  users: [User]
+  messages: [Message]
 }
 
 type User {
   _id: String
   name: String!
   email: String!
-  groupChat: GroupChat
+  groups: [Group]
+  messages: [Message]
 }
 
 type Query {
-  users: [User!]!
-  groupChats: [GroupChat!]!
+  user(id: String!): User!
+  getGroupsByUserId(userId: String!): [Group!]!
+  getMessagesByUserId(userId: String!): [Message!]!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  createGroupChat(createGroupChatInput: CreateGroupChatInput!): GroupChat!
+  createGroup(createGroupInput: CreateGroupInput!): Group!
+  createMessage(createMessageInput: CreateMessageInput!): Message!
 }
 
 input CreateUserInput {
   _id: String
   name: String!
   email: String!
-  createGroupChatInput: CreateGroupChatInput!
+  createGroupInput: CreateGroupInput
 }
 
-input CreateGroupChatInput {
+input CreateGroupInput {
   _id: String
   model: String!
   modelId: Float!
+  userId: String
+}
+
+input CreateMessageInput {
+  _id: String
+  text: String!
+  userId: String!
+  groupId: String!
 }

@@ -11,10 +11,9 @@ export class UserResolver {
     private readonly service: UserService,
   ) {}
 
-  @Query((returns) => [User])
-  async users(): Promise<User[]> {
-    console.log(await this.service.findAll());
-    return this.service.findAll();
+  @Query((returns) => User)
+  async user(@Args('id', { type: () => String }) id: string): Promise<User> {
+    return this.service.findById(id);
   }
 
   @Mutation((returns) => User)

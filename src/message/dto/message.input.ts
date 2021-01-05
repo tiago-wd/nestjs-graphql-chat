@@ -1,13 +1,16 @@
 import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class CreateGroupChatInput {
+export class CreateMessageInput {
   @Field((type) => String, { nullable: true })
   _id: string;
 
   @Field((type) => String)
-  model: string;
+  text: string;
 
-  @Field((type) => Number)
-  modelId: number;
+  @Field((type) => String)
+  userId: string;
+
+  @Field((type) => String)
+  groupId: string;
 }

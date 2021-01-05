@@ -3,35 +3,35 @@ import { Injectable, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './models/user.model';
 import { CreateUserInput } from './dto/user.input';
-import {
-  GroupChat,
-  GroupChatDocument,
-} from '../group-chat/models/group-chat.model';
-import { GroupChatService } from '../group-chat/group-chat.service';
+import { Group, GroupDocument } from '../group/models/group.model';
+import { GroupService } from '../group/group.service';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(User.name) private userModel: Model<UserDocument>,
-    @Inject(GroupChatService)
-    private readonly groupChatService: GroupChatService,
+    @InjectModel(User.name) private model: Model<UserDocument>,
+    @Inject(GroupService)
+    private readonly GroupService: GroupService,
   ) {}
 
   async create(createUserInput: CreateUserInput): Promise<User> {
-    const createdGroupChat = await this.groupChatService.create(
-      createUserInput.createGroupChatInput,
+    const createdGroup = await this.GroupService.create(
+      createUserInput.createGroupInput,
     );
+
     const userInput = {
       name: createUserInput.name,
       email: createUserInput.email,
-      groupChat: createdGroupChat._id,
+      groups: createdGroup._id,
     };
-    const createdUser = new this.userModel(userInput);
 
-    return await createdUser.save();
+    const user = new this.model(userInput);
+    const createdUser = await user.save();
+
+    return await createdUser.populate('groups').execPopulate();
   }
 
-  async findAll(): Promise<User[]> {
-    return this.userModel.find().populate('groupChat').exec();
+  async findById(id: string): Promise<User> {
+    return this.model.findById(id).populate('groups', 'messages').exec();
   }
 }
