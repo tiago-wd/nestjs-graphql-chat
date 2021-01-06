@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
 import { UserModule } from './user/user.module';
 import { GroupModule } from './group/group.module';
 import { MessageModule } from './message/message.module';
@@ -13,6 +14,7 @@ import { join } from 'path';
     ),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      installSubscriptionHandlers: true,
       debug: true,
       playground: true,
     }),
@@ -20,5 +22,6 @@ import { join } from 'path';
     GroupModule,
     MessageModule,
   ],
+  providers: [{ provide: PubSub, useValue: new PubSub() }],
 })
 export class AppModule {}

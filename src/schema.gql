@@ -54,6 +54,10 @@ input CreateGroupInput {
 input CreateMessageInput {
   _id: String
   text: String!
-  userId: String!
-  groupId: String!
+  user: String!
+  group: String
+}
+
+type Subscription {
+  messageAdded(groupId: String!): Message!
 }

@@ -9,8 +9,8 @@ export class CreateMessageInput {
   text: string;
 
   @Field((type) => String)
-  userId: string;
+  user: string;
 
-  @Field((type) => String)
-  groupId: string;
+  @Field((type) => String, { nullable: true })
+  group: string;
 }

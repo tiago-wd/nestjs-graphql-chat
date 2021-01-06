@@ -12,8 +12,10 @@ export class MessageService {
   ) {}
 
   async create(createMessageInput: CreateMessageInput): Promise<Message> {
-    const createdMessage = new this.model(createMessageInput);
-    return await createdMessage.save();
+    const message = new this.model(createMessageInput);
+    const createdMessage = await message.save();
+
+    return await createdMessage.populate('user').execPopulate();
   }
 
   async getMessagesByUserId(userId: string): Promise<Message[]> {
