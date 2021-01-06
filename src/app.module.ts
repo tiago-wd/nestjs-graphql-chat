@@ -1,3 +1,4 @@
+import { getEnv } from './common/getenv';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -10,7 +11,9 @@ import { join } from 'path';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://chat-user-test:vumgqcCfnrm3Any@cluster0.25grh.mongodb.net/test?retryWrites=true&w=majority',
+      `mongodb+srv://${getEnv('DB_HOST')}:${getEnv(
+        'DB_PASS',
+      )}@cluster0.25grh.mongodb.net/test?retryWrites=true&w=majority`,
     ),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
