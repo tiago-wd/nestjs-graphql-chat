@@ -12,9 +12,13 @@ export class Group {
   @Field((type) => String, { nullable: true })
   _id: string;
 
-  @Field((type) => String)
+  @Field((type) => String, { nullable: true })
   @Prop()
   name: string;
+
+  @Field((type) => User)
+  @Prop({ type: Types.ObjectId, ref: 'User' })
+  owner: User;
 
   @Field((type) => [User], { nullable: 'itemsAndList' })
   @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })

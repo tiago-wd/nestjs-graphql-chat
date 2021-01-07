@@ -8,6 +8,9 @@ export class CreateGroupInput {
   @Field((type) => String)
   name: string;
 
+  @Field((type) => String)
+  owner: string;
+
   @Field((type) => [String], { nullable: true })
-  users: [string];
+  users?: [string];
 }

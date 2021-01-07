@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Group, GroupSchema } from './models/group.model';

@@ -11,7 +11,8 @@ type Message {
 
 type Group {
   _id: String
-  name: String!
+  name: String
+  owner: User!
   users: [User]
   messages: [Message]
 }
@@ -47,6 +48,7 @@ input CreateUserInput {
 input CreateGroupInput {
   _id: String
   name: String!
+  owner: String!
   users: [String!]
 }
 
