@@ -26,6 +26,7 @@ type User {
 
 type Query {
   user(id: String!): User!
+  users: [User!]!
   getGroupsByUserId(userId: String!): [Group!]!
   getMessagesByUserId(userId: String!): [Message!]!
 }

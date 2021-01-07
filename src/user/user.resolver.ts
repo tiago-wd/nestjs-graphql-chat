@@ -16,6 +16,11 @@ export class UserResolver {
     return this.service.findById(id);
   }
 
+  @Query((returns) => [User])
+  async users(): Promise<User[]> {
+    return this.service.findAll();
+  }
+
   @Mutation((returns) => User)
   async createUser(
     @Args('createUserInput') createUserInput: CreateUserInput,

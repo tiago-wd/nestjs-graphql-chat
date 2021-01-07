@@ -37,4 +37,8 @@ export class UserService {
   async findById(id: string): Promise<User> {
     return this.model.findById(id).populate('groups', 'messages').exec();
   }
+
+  async findAll(): Promise<User[]> {
+    return this.model.find().populate('groups').exec();
+  }
 }
