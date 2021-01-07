@@ -1,3 +1,4 @@
+import { GroupModule } from './../group/group.module';
 import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PubSub } from 'graphql-subscriptions';
@@ -10,6 +11,7 @@ import { UserModule } from '../user/user.module';
   imports: [
     MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
     forwardRef(() => UserModule),
+    GroupModule,
   ],
   providers: [MessageService, MessageResolver, PubSub],
   exports: [MessageService],

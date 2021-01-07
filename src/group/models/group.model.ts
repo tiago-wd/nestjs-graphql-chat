@@ -14,11 +14,7 @@ export class Group {
 
   @Field((type) => String)
   @Prop()
-  model: string;
-
-  @Field((type) => String)
-  @Prop()
-  modelId: string;
+  name: string;
 
   @Field((type) => [User], { nullable: 'itemsAndList' })
   @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })

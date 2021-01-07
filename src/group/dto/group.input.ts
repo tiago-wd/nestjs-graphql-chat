@@ -3,14 +3,11 @@ import { InputType, Field } from '@nestjs/graphql';
 @InputType()
 export class CreateGroupInput {
   @Field((type) => String, { nullable: true })
-  _id: string;
+  _id?: string;
 
   @Field((type) => String)
-  model: string;
+  name: string;
 
-  @Field((type) => Number)
-  modelId: number;
-
-  @Field((type) => String, { nullable: true })
-  userId: string;
+  @Field((type) => [String], { nullable: true })
+  users: [string];
 }

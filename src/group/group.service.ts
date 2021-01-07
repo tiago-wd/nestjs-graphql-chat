@@ -12,8 +12,10 @@ export class GroupService {
   ) {}
 
   async create(createGroupInput: CreateGroupInput): Promise<Group> {
-    const createdGroup = new this.model(createGroupInput);
-    return await createdGroup.save();
+    const group = new this.model(createGroupInput);
+    const createdGroup = await group.save();
+
+    return await createdGroup.populate('users').execPopulate();
   }
 
   async getGroupsByUserId(userId: string): Promise<Group[]> {
@@ -21,5 +23,12 @@ export class GroupService {
       .where('user', userId)
       .populate('users', 'messages')
       .exec();
+  }
+
+  createGroupInput(userId: string): CreateGroupInput {
+    return {
+      name: Math.random().toString(36).substr(2),
+      users: [userId],
+    };
   }
 }

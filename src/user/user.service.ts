@@ -15,14 +15,17 @@ export class UserService {
   ) {}
 
   async create(createUserInput: CreateUserInput): Promise<User> {
-    const createdGroup = await this.GroupService.create(
-      createUserInput.createGroupInput,
-    );
+    let createdGroup: Group;
+    if (createUserInput.createGroupInput) {
+      createdGroup = await this.GroupService.create(
+        createUserInput.createGroupInput,
+      );
+    }
 
     const userInput = {
       name: createUserInput.name,
       email: createUserInput.email,
-      groups: createdGroup._id,
+      groups: createdGroup?._id,
     };
 
     const user = new this.model(userInput);
